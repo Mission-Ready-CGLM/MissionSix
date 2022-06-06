@@ -1,0 +1,32 @@
+@isTest
+public class InsertRecordTask8Test {
+
+   public static testmethod void testCreateContact(){
+        
+            
+        Test.startTest();
+        	Contact output = [Select Id,Prior_Qualifications__c from Contact where Prior_Qualifications__c = 'Below Tertiary'];
+            System.debug('This is a student with Prior Qualifications'+output);
+            System.assertEquals('Below Tertiary', output.Prior_Qualifications__c);
+            System.assertEquals('Advanced', output.Enrolment_Progression__c);
+        Test.stopTest();
+        
+    }
+    
+     public static testmethod void updateContactTest1(){
+      	
+         Test.startTest();
+             Contact testContact = new Contact ();
+             testContact.Prior_Qualifications__c = 'Below Tertiary';
+             testContact.Enrolment_Progression__c = 'Extra';
+             insert testContact;
+             
+             //Contact output = Contact.updateContact(testContact.Id);
+                 
+            // System.assertEquals('Below Tertiary', output.Prior_Qualifications__c);  
+            // System.assertEquals('Extra', output.Enrolment_Progression__c);  
+
+            // Contact updatedContact = [Select id,Prior_Qualifications__c from Contact where Id=: output.Id];
+            // System.assertEquals(true, updatedContact.Enrolment_Progression__c);
+         Test.stopTest(); 
+     } 
