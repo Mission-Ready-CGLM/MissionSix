@@ -1,0 +1,31 @@
+//whenever contact is created enrole in SA1 Course -- AFTER Insert
+
+
+
+//if new contact is created
+//then update custom field Course__c = Sprint Training
+
+
+
+trigger SAContactTrigger on Contact (after insert) {
+
+//same object (Contact) = BEFORE Trigger
+//whenever Contact is created then Enrolement is SA1 -- BEFORE Insert
+if(trigger.isAfter){
+if(trigger.isInsert){
+List<Course__c> updatedCourseList= new List<Course__c>();
+//executed on create Contact
+for (Contact con : trigger.new){
+Course__c enrolement = new Course__c();
+enrolement.Subject_Name__c = 'Sprint Training';
+enrolement.Course_Id__c = 'SA1';
+enrolement.Course_Level__c = '1';
+enrolement.Start_Date__c = '1-8-2022';
+enrolement.End_Date__c = '30-9-2022';
+enrolement.Student__c = con.id;
+updatedCourseList.add(enrolement);
+}
+update updatedCourseList;
+}
+}
+}
