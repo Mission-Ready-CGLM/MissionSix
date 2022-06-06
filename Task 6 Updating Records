@@ -1,0 +1,70 @@
+public class UpdateRecordsTask6 {
+    
+    //create a new method UpdateEnrole
+    public static void UpdateEnrole(){
+        
+        //Get | SOQL Query -- students with Course Id SA1
+        //Assume all Students are Course SA1 – Sprint Training
+        List<Contact> contactList = [SELECT Id, Prior_Qualifications__c FROM Contact];//assumed manual -- Update randomly Prior Education >> “Below Tertiary”, “Tertiary Graduate”, “Tertiary Post-Graduate”
+        //else
+        //update randomly Prior Education >> “Below Tertiary”, “Tertiary Graduate”, “Tertiary Post-Graduate” for(Contact contact:contactList)
+        // Modify students Enrolement Progression with following logic
+        // If prior education level -- “Below Tertiary” >> Enrolment Progression - “Advanced” Sprint Training
+        // If prior education level -- “Tertiary Graduate” >> Enrolment Progression - “Ultimate” Sprint Training
+        // If prior education level -- “Tertiary Post-Graduate” >> Enrolment Progression - “Extra” Sprint Training //Modify | After the update modify the data
+        
+        //Set<String>setArray = new Set<String>{'Below Tertiary', 'Tertiary Graduate', 'Tertiary Post-Graduate'};
+            ////Convert the Set to a list
+            //List<String> lstArray = new List<String>();
+        //lstArray.addAll(setArray);
+        ////Generate a random list index
+        //Double randomNumber=Math.random();
+        //Integer arrayLength = lstArray.size();
+        //Integer randomIndex = (randomNumber*(arrayLength-1)).intValue();
+        ////Output the element at the list index generate above
+        System.debug('Random element: '+lstArray[randomIndex]);   
+       
+    List<Contact> updatedContactList = new List<Contact>(); 
+
+for(Contact contact:contactList){
+    if(contact.Prior_Qualifications__c = 'Below Tertiary'){
+        contact.Prior_Qualifications__c = true;
+        contact.Enrolment_Progression__c = 'Advanced';
+        updatedContactList.add(Contact);
+    }
+    if(Prior_Qualifications__c = 'Tertiary Graduate'){
+        contact.Enrolment_Progression__c = 'Ultimate';
+        updatedContactList.add(Contact);
+    }
+    if(Prior_Qualifications__c = 'Tertiary Post-Graduate'){
+        contact.Enrolment_Progression__c= 'Extra';
+        updatedContactList.add(Contact);
+    }
+    //Update
+    if (updatedContactList.size()>0){
+        update updatedContactList;
+    }
+}
+}
+}
+
+////Generate the set
+//Set<String>setArray = new Set<String>{'Below Tertiary', 'Tertiary Graduate', 'Tertiary Post-Graduate'};
+////Create a random index
+//Double randomNumber = Math.random90;
+//Integer arraySize = setARray.size();
+//Integer randomIndex = (randomNumber *(arraySize-1)).intValue();
+////Loop through the Set until you get to the element.
+//for (String str : setArray)
+//{
+//if(randomIndex == 0)
+//{
+//System.debug(Random element: '+str);
+//break;
+//}
+//randomIndex--;
+//}
+//
+//another alternative
+//List<id> mylist = new list<id>(myset);
+//Id randomid = mylist[math.random()*(mylist.size()-1)]
