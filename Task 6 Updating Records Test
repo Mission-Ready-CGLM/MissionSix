@@ -1,41 +1,37 @@
 @isTest
 public class UpdateRecordsTask6Test {
     
-        public static testmethod void updateContact(){
+    public static testmethod void testCreateContact(){
         
         Test.startTest();
-            Contact output = [SELECT Id, Prior_Qualifications__c, Enrolment_Progression__c FROM Contact]; //UpdateRecordsTask6.createContact('Student','Test1','Below Tertiary','Advanced');
-            System.debug('This is a student with Prior Qualifications created for test'+output);
-            System.assertEquals('Student', output.firstName);
-           	System.assertEquals('Test1', output.lastName);
-            System.assertEquals('Below Tertiary', output.Prior_Qualifications__c);
-            System.assertEquals('Advanced', output.Enrolment_Progression__c);
-        Test.stopTest();
         
+        Contact output = new Contact(FirstName='Student1', LastName='Test1', Prior_Qualifications__c='Below Tertiary', Enrolment_Progression__c = 'Extra' );
+        insert output;
+        
+        
+        Test.stopTest();
     }
     
-     public static testmethod void updateContactTest1(){
-      	
-         Test.startTest();
-             Contact testContact = new Contact ();
-           	 testContact.FirstName = 'Student';
-           	 testContact.LastName = 'Test1';
-             testContact.Prior_Qualifications__c = 'Below Tertiary';
-             testContact.Enrolment_Progression__c = 'Extra';
-             insert testContact;
-             
-             Contact output = Contact.updateContact(testContact.Id);
-              
-         	 System.assertEquals('Student', output.FirstName);  
-             System.assertEquals('Test1', output.LastName);  
-             System.assertEquals('Below Tertiary', output.Prior_Qualifications__c);  
-             System.assertEquals('Extra', output.Enrolment_Progression__c);  
-
-             Contact updatedContact = [Select id,Prior_Qualifications__c from Contact where Id=: output.Id];
-             System.assertEquals(true, updatedContact.Enrolment_Progression__c);
-         Test.stopTest();
-         
-     }
+    public static testmethod void updateContact1(){
+        
+        Test.startTest();
+        
+        Contact testContact = new Contact ();
+        testContact.FirstName = 'Student';
+        testContact.LastName = 'Test1';
+        testContact.Prior_Qualifications__c = 'Below Tertiary';
+        testContact.Enrolment_Progression__c = 'Extra';
+        insert testContact;
+        
+        List<Contact> output = UpdateRecordsTask6.updateContact();
+        System.debug('This is the output' +output);
+        
+        System.assertEquals('Lucy', output[0].FirstName);
+     	System.assertEquals('Smith', output[0].LastName);
+        System.assertEquals('Below Tertiary', output[0].Prior_Qualifications__c);
+        //System.assertEquals('Extra', output[0].Enrolment_Progression__c);
+      
+        Test.stopTest();
+    }
     
-   
 }
