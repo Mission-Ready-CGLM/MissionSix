@@ -1,0 +1,26 @@
+@isTest
+public class SAContactTriggerTest {
+
+public static testmethod void testTrigger(){
+   
+    Test.startTest();
+    
+    	//create a new Student/Contact
+    	Contact con = new Contact();
+    		//con is variable for new contact
+    		//enrolement is variable - for a new enrolement
+     		Course__c enrolement = new Course__c();
+    
+                enrolement.Subject_Name__c = 'Sprint Training';
+                enrolement.Course_Id__c = 'SA1';
+                enrolement.Course_Level__c = '1';
+                enrolement.Start_Date__c = '1-8-2022';
+                enrolement.End_Date__c = '30-9-2022';
+                enrolement.Student__c = con.id;
+    			insert enrolement; 
+    
+  		List<Course__c> updatedCourseList = [SELECT id,Subject_Name__c FROM Course__c where Subject_Name__c= 'Sprint Training'];
+    	System.assertEquals('Sprint Training',updatedCourseList[0].Subject_Name__c);
+    Test.stopTest();
+	}
+}
