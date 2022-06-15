@@ -1,33 +1,37 @@
-public class UpdateRecordsTask6 {
+//create new Apex Class UpdateEnrolement
+//Update Student enrolment -- Teriary Post-Graduate > Advanced
+//Update Student enrolment -- Teriary Graduate > Ultimate
+//Update Student enrolment -- Below Teriary > Extra
+
+public class UpdateEnrolement {
     
-    //create a new method updateContact
-    public static List<Contact> updateContact(){     
+    //create a new method updateEnrolement
+    public static List<Contact> updateEnrole(){     
        
-        List<Contact> conList = new List<Contact> {
-            new Contact(FirstName='Lucy',LastName='Smith', Prior_Qualifications__c = 'Below Tertiary', Enrolment_Progression__c = 'Advanced')};
-            System.debug('This has created a new contact'+conList);         
-            insert conList;
-          
-        List<Contact> listToUpdate = new List<Contact>(); 
+        //get -- SOQL Query students Course Id, Prior Qualification (assumed all AS1)
+        List<Contact> conList = [SELECt Id, Prior_Qualification__c FROM Contact];
         
-        for(Contact con : conList) {
-            if(con.Prior_Qualifications__c == 'Below Tertiary'){        
-                con.Enrolment_Progression__c = 'Advanced';
-                listToUpdate.add(con);
+        //modify  | After the Enrolement Progression update modify the data         
+        List<Contact> updatedContactList = new List<Contact>(); 
+        
+        for(Contact cont : contactList) {
+        
+            if(cont.Prior_Qualifications__c == 'Below Tertiary'){        
+                cont.Enrolment_Progression__c = 'Extra';
+                updatedContactList.add(cont);
             }
-             if(con.Prior_Qualifications__c == 'Tertiary Graduate'){
-                con.Enrolment_Progression__c = 'Ultimate';
-                listToUpdate.add(con);
+             if(cont.Prior_Qualifications__c == 'Tertiary Graduate'){
+                cont.Enrolment_Progression__c = 'Ultimate';
+                updatedContactList.add(cont);
             }
-             if(con.Prior_Qualifications__c == 'Tertiary Post-Graduate'){
-                con.Enrolment_Progression__c = 'Extra';
-                listToUpdate.add(con);
+             if(cont.Prior_Qualifications__c == 'Tertiary Post-Graduate'){
+                cont.Enrolment_Progression__c = 'Advanced';
+                updatedContactList.add(cont);
             }
-          
-                
-            }
-          //Update
-                 update listToUpdate;
-        return listToUpdate;
+              
+        }
+        //Update
+         update updatedContactList;
+         return updatedContactList;
         }
     }
